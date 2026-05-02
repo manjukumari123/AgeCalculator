@@ -6,8 +6,7 @@ public class AgeCalculator {
 
         int byear, bmonth, bday;
         int cyear, cmonth, cday;
-        
-        //Enter all the details 
+
         System.out.print("Enter birth year: ");
         byear = sc.nextInt();
 
@@ -26,14 +25,23 @@ public class AgeCalculator {
         System.out.print("Enter current day: ");
         cday = sc.nextInt();
 
-        int age = cyear - byear;
+        // Validation (important)
+        if (byear > cyear || 
+           (byear == cyear && bmonth > cmonth) || 
+           (byear == cyear && bmonth == cmonth && bday > cday)) {
 
-        // adjust if birthday not yet occurred this year
-        if (cmonth < bmonth || (cmonth == bmonth && cday < bday)) {
-            age--;
+            System.out.println("Invalid Date of Birth! Age cannot be negative.");
+
+        } else {
+
+            int age = cyear - byear;
+
+            if (cmonth < bmonth || (cmonth == bmonth && cday < bday)) {
+                age--;
+            }
+
+            System.out.println("Your age is: " + age);
         }
-
-        System.out.println("Your age is: " + age);
 
         sc.close();
     }
