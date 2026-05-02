@@ -25,17 +25,23 @@ public class AgeCalculator {
         System.out.print("Enter current day: ");
         cday = sc.nextInt();
 
-        // Validation (important)
-        if (byear > cyear || 
-           (byear == cyear && bmonth > cmonth) || 
-           (byear == cyear && bmonth == cmonth && bday > cday)) {
+        // Check invalid month/day
+        if (bmonth < 1 || bmonth > 12 || bday < 1 || bday > 31) {
+            System.out.println("Invalid Date! Please enter correct day and month.");
+        }
+
+        // Check future date
+        else if (byear > cyear || 
+                (byear == cyear && bmonth > cmonth) || 
+                (byear == cyear && bmonth == cmonth && bday > cday)) {
 
             System.out.println("Invalid Date of Birth! Age cannot be negative.");
+        }
 
-        } else {
-
+        else {
             int age = cyear - byear;
 
+            // Adjust if birthday not yet happened this year
             if (cmonth < bmonth || (cmonth == bmonth && cday < bday)) {
                 age--;
             }
